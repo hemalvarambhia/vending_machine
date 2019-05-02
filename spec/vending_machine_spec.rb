@@ -16,8 +16,8 @@ describe VendingMachine do
 
   describe '#dispense' do
     let(:product_number) { '25' }
-    let(:amount_payed) { 50 }
-
+    let(:amount_inserted) { 50 }
+    
     context 'when the customer pays the correct amount for the item' do
       before do
         allow(catalogue).to(
@@ -28,13 +28,13 @@ describe VendingMachine do
       it 'dispenses the item' do
         expect(item_dispenser).to receive(:dispense).with(product_number)
 
-        vending_machine.dispense(product_number, amount_payed)
+        vending_machine.dispense(product_number, amount_inserted)
       end
 
       it 'dispenses no change' do
         expect(change_dispenser).not_to receive(:dispense)
 
-        vending_machine.dispense(product_number, amount_payed)
+        vending_machine.dispense(product_number, amount_inserted)
       end
     end
 
@@ -48,7 +48,7 @@ describe VendingMachine do
       it 'does not dispense the item' do
         expect(item_dispenser).not_to receive(:dispense)
 
-        vending_machine.dispense(product_number, amount_payed)
+        vending_machine.dispense(product_number, amount_inserted)
       end
       it 'does not dispense any change' do
         expect(change_dispenser).not_to receive(:dispense)
@@ -57,9 +57,11 @@ describe VendingMachine do
       end
       
       it 'asks them to insert the correct amount' do
-        expect(display_screen).to receive(:show).with('Please insert the correct amount')
-
-        vending_machine.dispense(product_number, amount_payed)
+        expect(display_screen).to(
+          receive(:show).with('Please insert the correct amount')
+        )
+        
+        vending_machine.dispense(product_number, amount_inserted)
       end
     end
   end
