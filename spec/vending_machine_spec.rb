@@ -86,7 +86,7 @@ describe VendingMachine do
       end
     end
 
-    context 'when the product is not available' do
+    context 'when the product is not listed in the catalogue' do
       it 'asks the user to select a different product'
 
       it 'does not dispense any change'
