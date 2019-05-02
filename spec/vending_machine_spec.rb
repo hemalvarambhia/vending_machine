@@ -54,7 +54,7 @@ describe VendingMachine do
       it 'does not dispense any change' do
         expect(change_dispenser).not_to receive(:dispense)
         
-        vending_machine.dispense(product_number, amount_payed)
+        vending_machine.dispense(product_number, amount_inserted)
       end
       
       it 'asks them to insert the correct amount' do
