@@ -2,9 +2,13 @@ require './lib/vending_machine'
 describe VendingMachine do
   let(:item_dispenser) { double(:item_dispenser).as_null_object }
   let(:change_dispenser) { double(:change_dispenser).as_null_object }
+  let(:catalogue) { double(:product_catalogue, price_for: 50) }
+  let(:display_screen) { double(:display_screen).as_null_object }
 
   subject(:vending_machine) do
     VendingMachine.new(
+      catalogue: catalogue,
+      display: display_screen,
       item_dispenser: item_dispenser,
       change_dispenser: change_dispenser,
     )
@@ -29,9 +33,28 @@ describe VendingMachine do
     end
 
     context 'when the customer does not insert enough money for the item' do
-      it 'does not dispense the item'
-      it 'does not dispense any change'
-      it 'asks them to insert the correct amount'
+      before do
+        allow(catalogue).to(
+          receive(:price_for).with(product_number).and_return 75
+        )
+       end
+          
+      it 'does not dispense the item' do
+        expect(item_dispenser).not_to receive(:dispense)
+
+        vending_machine.dispense(product_number, amount_payed)
+      end
+      it 'does not dispense any change' do
+        expect(change_dispenser).not_to receive(:dispense)
+        
+        vending_machine.dispense(product_number, amount_payed)
+      end
+      
+      it 'asks them to insert the correct amount' do
+        expect(display_screen).to receive(:show).with('Please insert the correct amount')
+
+        vending_machine.dispense(product_number, amount_payed)
+      end
     end
   end
 end
