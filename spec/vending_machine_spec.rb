@@ -2,7 +2,7 @@ require './lib/vending_machine'
 describe VendingMachine do
   let(:item_dispenser) { double(:item_dispenser).as_null_object }
   let(:change_dispenser) { double(:change_dispenser).as_null_object }
-  let(:catalogue) { double(:product_catalogue, price_for: 50) }
+  let(:catalogue) { double(:product_catalogue).as_null_object }
   let(:display_screen) { double(:display_screen).as_null_object }
 
   subject(:vending_machine) do
@@ -19,6 +19,12 @@ describe VendingMachine do
     let(:amount_payed) { 50 }
 
     context 'when the customer pays the correct amount for the item' do
+      before do
+        allow(catalogue).to(
+          receive(:price_for).with(product_number).and_return(50)
+        )
+      end
+          
       it 'dispenses the item' do
         expect(item_dispenser).to receive(:dispense).with(product_number)
 
