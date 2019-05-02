@@ -85,5 +85,13 @@ describe VendingMachine do
         vending_machine.dispense(product_number, amount_inserted)
       end
     end
+
+    context 'when the product is not available' do
+      it 'asks the user to select a different product'
+
+      it 'does not dispense any change'
+
+      it 'does not dispense any product'
+    end
   end
 end
