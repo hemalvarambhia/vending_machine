@@ -65,5 +65,10 @@ describe VendingMachine do
         vending_machine.dispense(product_number, amount_inserted)
       end
     end
+
+    context 'when the customer overpays for the product' do
+      it 'dispenses the correct change'
+      it 'dispenses the product'
+    end
   end
 end
