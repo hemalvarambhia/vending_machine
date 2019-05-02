@@ -21,4 +21,8 @@ class VendingMachine
 
     @product_dispenser.dispense(product)
   end
+
+  def amount_of_change
+    @change_dispenser.amount_of_change
+  end
 end

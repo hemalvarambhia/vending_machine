@@ -10,7 +10,7 @@ describe VendingMachine do
       catalogue: catalogue,
       display: display_screen,
       product_dispenser: product_dispenser,
-      change_dispenser: change_dispenser,
+      change_dispenser: change_dispenser
     )
   end
 
@@ -92,6 +92,14 @@ describe VendingMachine do
       it 'asks the user to select a different product'
 
       it 'does not dispense any product'
+    end
+  end
+
+  describe '#amount_of_change' do
+    it 'returns the amount of change in the machine in pence' do
+      allow(change_dispenser).to receive(:amount_of_change).and_return 5000
+
+      expect(vending_machine.amount_of_change).to eq 5000
     end
   end
 end
