@@ -18,14 +18,14 @@ describe VendingMachine do
     let(:product_number) { '25' }
     let(:amount_inserted) { 50 }
     
-    context 'when the customer pays the correct amount for the item' do
+    context 'when the customer pays the correct amount for the product' do
       before do
         allow(catalogue).to(
           receive(:price_for).with(product_number).and_return(50)
         )
       end
           
-      it 'dispenses the item' do
+      it 'dispenses the product' do
         expect(item_dispenser).to receive(:dispense).with(product_number)
 
         vending_machine.dispense(product_number, amount_inserted)
@@ -38,18 +38,19 @@ describe VendingMachine do
       end
     end
 
-    context 'when the customer does not insert enough money for the item' do
+    context 'when the customer does not insert enough money for the product' do
       before do
         allow(catalogue).to(
           receive(:price_for).with(product_number).and_return 75
         )
        end
           
-      it 'does not dispense the item' do
+      it 'does not dispense the product' do
         expect(item_dispenser).not_to receive(:dispense)
 
         vending_machine.dispense(product_number, amount_inserted)
       end
+      
       it 'does not dispense any change' do
         expect(change_dispenser).not_to receive(:dispense)
         
