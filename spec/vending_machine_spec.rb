@@ -97,9 +97,25 @@ describe VendingMachine do
 
   describe '#amount_of_change' do
     it 'returns the amount of change in the machine in pence' do
-      allow(change_dispenser).to receive(:amount_of_change).and_return 5000
+      allow(change_dispenser).to receive(:amount_of_change).and_return(5000)
 
       expect(vending_machine.amount_of_change).to eq 5000
+    end
+  end
+
+  describe '#products_in_stock' do
+    let(:expected) do
+      {
+        '123' => 10,
+        '345' => 5,
+        '678' => 25
+      }
+    end
+    
+    it 'returns the products in stock (product number & the quantity available)' do
+      allow(product_dispenser).to receive(:products_in_stock).and_return(expected)
+      
+      expect(vending_machine.products_in_stock).to eq expected
     end
   end
 end
