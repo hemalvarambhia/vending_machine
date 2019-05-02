@@ -14,7 +14,7 @@ describe VendingMachine do
     )
   end
 
-  describe '#purchase' do
+  describe '#dispense' do
     let(:product_number) { '25' }
     let(:amount_payed) { 50 }
 
