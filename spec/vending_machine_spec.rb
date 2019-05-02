@@ -27,5 +27,11 @@ describe VendingMachine do
         vending_machine.dispense(product_number, amount_payed)
       end
     end
+
+    context 'when the customer does not insert enough money for the item' do
+      it 'does not dispense the item'
+      it 'does not dispense any change'
+      it 'asks them to insert the correct amount'
+    end
   end
 end
