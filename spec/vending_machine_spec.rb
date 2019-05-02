@@ -1,6 +1,6 @@
 require './lib/vending_machine'
 describe VendingMachine do
-  let(:item_dispenser) { double(:item_dispenser).as_null_object }
+  let(:product_dispenser) { double(:product_dispenser).as_null_object }
   let(:change_dispenser) { double(:change_dispenser).as_null_object }
   let(:catalogue) { double(:product_catalogue).as_null_object }
   let(:display_screen) { double(:display_screen).as_null_object }
@@ -9,7 +9,7 @@ describe VendingMachine do
     VendingMachine.new(
       catalogue: catalogue,
       display: display_screen,
-      item_dispenser: item_dispenser,
+      item_dispenser: product_dispenser,
       change_dispenser: change_dispenser,
     )
   end
@@ -26,7 +26,7 @@ describe VendingMachine do
       end
           
       it 'dispenses the product' do
-        expect(item_dispenser).to receive(:dispense).with(product_number)
+        expect(product_dispenser).to receive(:dispense).with(product_number)
 
         vending_machine.dispense(product_number, amount_inserted)
       end
@@ -43,10 +43,10 @@ describe VendingMachine do
         allow(catalogue).to(
           receive(:price_for).with(product_number).and_return 75
         )
-       end
+      end
           
       it 'does not dispense the product' do
-        expect(item_dispenser).not_to receive(:dispense)
+        expect(product_dispenser).not_to receive(:dispense)
 
         vending_machine.dispense(product_number, amount_inserted)
       end
@@ -67,8 +67,23 @@ describe VendingMachine do
     end
 
     context 'when the customer overpays for the product' do
-      it 'dispenses the correct change'
-      it 'dispenses the product'
+      before do
+        allow(catalogue).to(
+          receive(:price_for).with(product_number).and_return(50 - 5)
+        )
+      end
+      
+      it 'dispenses the correct change'do
+        expect(change_dispenser).to receive(:dispense).with(5)
+
+        vending_machine.dispense(product_number, amount_inserted)
+      end
+      
+      it 'dispenses the product' do
+        expect(product_dispenser).to receive(:dispense).with(product_number)
+
+        vending_machine.dispense(product_number, amount_inserted)
+      end
     end
   end
 end
