@@ -93,6 +93,14 @@ describe VendingMachine do
 
       it 'does not dispense any product'
     end
+
+    context 'when the product is out of stock' do
+      it 'returns the customer there money back'
+
+      it 'asks the user to select a different product'
+
+      it 'despenses no product'
+    end
   end
 
   describe '#amount_of_change' do
