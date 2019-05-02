@@ -7,10 +7,12 @@ class VendingMachine
 
   def dispense(product, amount_inserted)
     price_of_product = @catalogue.price_for(product)
+
     if price_of_product > amount_inserted
       @display.show('Please insert the correct amount')
       return
     end
+
     @item_dispenser.dispense(product)
   end
 end
