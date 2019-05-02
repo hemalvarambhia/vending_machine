@@ -1,7 +1,7 @@
 class VendingMachine
-  def initialize(catalogue:, item_dispenser:, change_dispenser:, display:)
+  def initialize(catalogue:, product_dispenser:, change_dispenser:, display:)
     @catalogue = catalogue
-    @item_dispenser = item_dispenser
+    @product_dispenser = product_dispenser
     @change_dispenser = change_dispenser
     @display = display
   end
@@ -19,6 +19,6 @@ class VendingMachine
       @change_dispenser.dispense(change)
     end
 
-    @item_dispenser.dispense(product)
+    @product_dispenser.dispense(product)
   end
 end

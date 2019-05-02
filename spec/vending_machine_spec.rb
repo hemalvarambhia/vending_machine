@@ -9,7 +9,7 @@ describe VendingMachine do
     VendingMachine.new(
       catalogue: catalogue,
       display: display_screen,
-      item_dispenser: product_dispenser,
+      product_dispenser: product_dispenser,
       change_dispenser: change_dispenser,
     )
   end
