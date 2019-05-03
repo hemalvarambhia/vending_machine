@@ -31,6 +31,14 @@ describe VendingMachine do
         vending_machine.dispense(product_number, amount_inserted)
       end
 
+      it 'asks the user to collect their product' do
+        expect(display_screen).to(
+          receive(:show).with('Please collect your product')
+        )
+
+        vending_machine.dispense(product_number, amount_inserted)
+      end
+
       it 'dispenses no change' do
         expect(change_dispenser).not_to receive(:dispense)
 

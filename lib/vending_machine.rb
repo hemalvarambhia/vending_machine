@@ -18,7 +18,8 @@ class VendingMachine
       change = amount_inserted - price_of_product
       @change_dispenser.dispense(change)
     end
-
+    
+    @display.show('Please collect your product')
     @product_dispenser.dispense(product)
   end
 
