@@ -16,11 +16,10 @@ class VendingMachine
 
     if amount_inserted > price_of_product
       change = amount_inserted - price_of_product
-      @change_dispenser.dispense(change)
+      dispense_change(change)
     end
     
-    @display.show('Please collect your product')
-    @product_dispenser.dispense(product)
+    dispense_product(product)
   end
 
   def amount_of_change
@@ -29,5 +28,17 @@ class VendingMachine
 
   def products_in_stock
     @product_dispenser.products_in_stock
+  end
+
+  private
+
+  def dispense_change(change)
+    @display.show('Please collect your change')
+    @change_dispenser.dispense(change)
+  end
+
+  def dispense_product(product_number)
+    @display.show('Please collect your product')
+    @product_dispenser.dispense(product_number)
   end
 end
