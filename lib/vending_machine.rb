@@ -6,8 +6,8 @@ class VendingMachine
     @display = display
   end
 
-  def dispense(product, amount_inserted)
-    price_of_product = @catalogue.price_for(product)
+  def dispense(product_number, amount_inserted)
+    price_of_product = @catalogue.price_for(product_number)
 
     if price_of_product > amount_inserted
       @display.show('Please insert the correct amount')
@@ -19,7 +19,7 @@ class VendingMachine
       dispense_change(change)
     end
     
-    dispense_product(product)
+    dispense_product(product_number)
   end
 
   def amount_of_change
