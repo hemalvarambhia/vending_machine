@@ -120,10 +120,26 @@ describe VendingMachine do
   end
 
   describe '#amount_of_change' do
+    let(:expected) do
+      {
+        200 => 50,
+        100 => 1,
+        50 => 2,
+        20 => 1,
+        10 => 1,
+        5 => 0,
+        2 => 50,
+        1 => 100
+      }
+    end
+    
     it 'returns the amount of change in the machine in pence' do
-      allow(change_dispenser).to receive(:amount_of_change).and_return(5000)
+      allow(change_dispenser).to(
+        receive(:amount_of_change)
+        .and_return(expected)
+      )
 
-      expect(vending_machine.amount_of_change).to eq 5000
+      expect(vending_machine.amount_of_change).to eq expected
     end
   end
 
