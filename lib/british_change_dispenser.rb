@@ -9,6 +9,14 @@ class BritishChangeDispenser
   end
 
   def change_for(change)
-    [ change ]
+    return [ change ] if change == available_denominations.first
+    [change - available_denominations.first] +
+      change_for(change - available_denominations.first)
+  end
+
+  private
+
+  def available_denominations
+    @amount_of_change.select { |_, quantity| quantity > 0 }.keys
   end
 end
