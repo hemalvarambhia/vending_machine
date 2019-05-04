@@ -14,14 +14,33 @@ describe BritishChangeDispenser do
           }
         end
         
-        it 'dispenses £1 and 50p, leaving £1.50 remaining' do
+        it 'dispenses £1, leaving no change remaining' do
           change_dispenser.dispense(100)
           expect(change_dispenser.amount_of_change).to eq expected
         end
       end
     end
-  end
 
+    context '£1.50' do
+      context 'given the dispenser has £1.50 total in change initially' do
+        subject(:change_dispenser) do
+          described_class.new(100 => 1, 50 => 1)
+        end
+
+        let(:expected) do
+          {
+            100 => 0,
+            50 => 0
+          }
+        end
+        
+        it 'dispenses £1 and 50p, leaving no change remaining' do
+          change_dispenser.dispense(150)
+          expect(change_dispenser.amount_of_change).to eq expected
+        end
+      end
+    end
+  end
   
   describe '#change_for' do
     context '£2' do

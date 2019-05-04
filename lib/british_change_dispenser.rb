@@ -5,7 +5,8 @@ class BritishChangeDispenser
   end
   
   def dispense(change)
-    @amount_of_change[100] = 0
+    coins = change_for(change)
+    coins.each { |coin| @amount_of_change[coin] = 0 }
   end
 
   def change_for(change)
