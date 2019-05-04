@@ -61,6 +61,42 @@ describe BritishChangeDispenser do
         end
       end
     end
+
+    context '£ 4.15' do
+      context 'when the dipenser has £5.88 total in change initially' do
+        subject(:change_dispenser) do
+          described_class.new(
+            200 => 2,
+            100 => 1,
+            50 => 1,
+            20 => 1,
+            10 => 1,
+            5 => 1,
+            2 => 1,
+            1 => 1
+          )
+        end
+
+        let(:expected) do
+          {
+            200 => 0,
+            100 => 1,
+            50 => 1,
+            20 => 1,
+            10 => 0,
+            5 => 0,
+            2 => 1,
+            1 => 1
+          }
+        end
+        
+        it 'dispenses £4.15, leaving £ 1.73 in change remaining' do
+          change_dispenser.dispense(415)
+          
+          expect(change_dispenser.amount_of_change).to eq expected
+        end
+      end
+    end
   end
   
   describe '#change_for' do
