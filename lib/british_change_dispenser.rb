@@ -12,7 +12,7 @@ class BritishChangeDispenser
     required_denominations =
       available_denominations.reject { |coin| coin > change }
     return [ change ] if change == required_denominations.first
-    [change - required_denominations.first] +
+    [required_denominations.first] +
       change_for(change - required_denominations.first)
   end
 

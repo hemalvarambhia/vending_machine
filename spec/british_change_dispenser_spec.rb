@@ -43,5 +43,17 @@ describe BritishChangeDispenser do
         end
       end
     end
+
+    context '£3' do
+      context 'given we have £2 and £1 coins' do
+        subject(:change_dispenser) do
+          described_class.new(200 => 10, 100 => 2)
+        end
+
+        it 'returns a £2 coin and £1' do
+          expect(change_dispenser.change_for(300)).to eq [200, 100]
+        end
+      end
+    end
   end
 end
