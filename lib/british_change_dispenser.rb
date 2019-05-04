@@ -5,8 +5,13 @@ class BritishChangeDispenser
   end
   
   def dispense(change)
-    coins = change_for(change)
-    coins.each { |coin| @amount_of_change[coin] = 0 }
+    coins_by_denomination = change_for(change)
+            .group_by { |coin| coin }
+            .map { |denomination, coins| [ denomination, coins.count ] }
+            .to_h
+    coins_by_denomination.each do |denomination, quantity|
+      @amount_of_change[denomination] = @amount_of_change[denomination] - quantity
+    end
   end
 
   def change_for(change)
