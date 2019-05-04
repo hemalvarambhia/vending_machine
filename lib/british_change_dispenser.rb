@@ -5,7 +5,7 @@ class BritishChangeDispenser
   end
   
   def dispense(change)
-    # TODO
+    @amount_of_change[100] = 0
   end
 
   def change_for(change)

@@ -1,6 +1,28 @@
 # coding: utf-8
 require './lib/british_change_dispenser'
 describe BritishChangeDispenser do
+  describe '#dispense' do
+    context '£1' do
+      context 'given the dispenser has £1 total in change initially' do
+        subject(:change_dispenser) do
+          described_class.new(100 => 1)
+        end
+
+        let(:expected) do
+          {
+            100 => 0,
+          }
+        end
+        
+        it 'dispenses £1 and 50p, leaving £1.50 remaining' do
+          change_dispenser.dispense(100)
+          expect(change_dispenser.amount_of_change).to eq expected
+        end
+      end
+    end
+  end
+
+  
   describe '#change_for' do
     context '£2' do
       context 'given we have £2 coins' do
