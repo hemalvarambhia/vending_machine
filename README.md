@@ -8,7 +8,7 @@ In terms of modeling, I have assumed the vending machine consists of:
 - a change dispenser;
 - a display to show the user any instructions.
 
-No edge cases have been considered in solving this problem beyond the any
+No edge cases have been considered in solving this problem beyond any
 specified in the functional requirements.
 Nevertheless, edge cases have been identified and listed as pending tests and would be the topic of a conversation with the manufacterer of the vending machine.
 
@@ -20,7 +20,7 @@ In terms of reviewing the work I recommend starting with the
 I used top down TDD with mock objects to develop the solution and the vending
 machine is the top level unit test. The interfaces discovered where then used
 to TDD the next layer down.
-The `BasicProductDispenser` and `TerminalDisplay` have not been tested as the logic is considered to be very simple.
+The `BasicProductDispenser` and `TerminalDisplay` have not been tested as the logic is considered to be very simple. I added an integrated test with real objects to stay honest (`vending_machine_integrated_spec.rb`).
 
 The way the work has been done (using dependency inversion) means
 that we can support any currency since that detail has been isolated in the change dispenser. Similarly we have encapsulated the vending machine from implementation details of the product dispenser and product catalogue so the code is, hopefully, SOLID. The parts of the machine listed above are now polymorphic objects with clearly defined contracts.
