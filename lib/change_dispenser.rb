@@ -6,7 +6,7 @@ class ChangeDispenser
   end
   
   def dispense(change)
-    coins_by_denomination = change_for(change)
+    coins_by_denomination = coins_for(change)
             .group_by { |coin| coin }
             .map { |denomination, coins| [ denomination, coins.count ] }
             .to_h
@@ -15,13 +15,13 @@ class ChangeDispenser
     end
   end
 
-  def change_for(change)
+  def coins_for(change)
     required_denominations =
       available_denominations.reject { |coin| coin > change }
     return [ change ] if change == required_denominations.first
     [required_denominations.first] +
-      change_for(change - required_denominations.first)
-  end
+      coins_for(change - required_denominations.first)
+  end  
 
   private
 

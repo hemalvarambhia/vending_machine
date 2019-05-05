@@ -99,13 +99,13 @@ describe ChangeDispenser do
     end
   end
   
-  describe '#change_for' do
+  describe '#coins_for' do
     context '£2' do
       context 'given we have £2 coins' do
         subject(:change_dispenser) { described_class.new(200 => 1) }
         
         it 'returns £2 coin' do
-          expect(change_dispenser.change_for(200)).to eq [200]
+          expect(change_dispenser.coins_for(200)).to eq [200]
         end
       end
 
@@ -115,7 +115,7 @@ describe ChangeDispenser do
         end
         
         it 'returns 2 £1 coins' do
-          expect(change_dispenser.change_for(200)).to eq [100, 100]
+          expect(change_dispenser.coins_for(200)).to eq [100, 100]
         end
       end
     end
@@ -127,7 +127,7 @@ describe ChangeDispenser do
         end
         
         it 'returns a £1 coin' do
-          expect(change_dispenser.change_for(100)).to eq [100]
+          expect(change_dispenser.coins_for(100)).to eq [100]
         end
       end
 
@@ -137,7 +137,7 @@ describe ChangeDispenser do
         end
 
         it 'returns a £1 coin' do
-          expect(change_dispenser.change_for(100)).to eq [100]
+          expect(change_dispenser.coins_for(100)).to eq [100]
         end
       end
     end
@@ -149,7 +149,7 @@ describe ChangeDispenser do
         end
 
         it 'returns a £2 coin and £1' do
-          expect(change_dispenser.change_for(300)).to eq [200, 100]
+          expect(change_dispenser.coins_for(300)).to eq [200, 100]
         end
       end
     end
@@ -163,7 +163,7 @@ describe ChangeDispenser do
         let(:expected) { [100, 20, 10] }
         
         it 'returns the correct change' do
-          expect(change_dispenser.change_for(130)).to eq expected
+          expect(change_dispenser.coins_for(130)).to eq expected
         end
       end
     end
@@ -188,7 +188,7 @@ describe ChangeDispenser do
         end
 
         it 'returns the correct change' do
-          expect(change_dispenser.change_for(388)).to eq expected
+          expect(change_dispenser.coins_for(388)).to eq expected
         end
       end
     end
@@ -213,7 +213,7 @@ describe ChangeDispenser do
         end
 
         it 'returns the correct change' do
-          expect(change_dispenser.change_for(585)).to eq expected
+          expect(change_dispenser.coins_for(585)).to eq expected
         end
       end
     end
