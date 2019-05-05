@@ -20,7 +20,7 @@ In terms of reviewing the work I recommend starting with the
 I used top down TDD with mock objects to develop the solution and the vending
 machine is the top level unit test. The interfaces discovered where then used
 to TDD the next layer down.
-The `BasicProductDispenser` has not been tested as the logic is considered to be very simple.
+The `BasicProductDispenser` and `TerminalDisplay` have not been tested as the logic is considered to be very simple.
 
 ## Executing the program
 For now, due to time constraints, I have created a script where we
