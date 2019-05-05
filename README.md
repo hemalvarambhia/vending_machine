@@ -20,7 +20,8 @@ In terms of reviewing the work I recommend starting with the
 I used top down TDD with mock objects to develop the solution and the vending
 machine is the top level unit test. The interfaces discovered where then used
 to TDD the next layer down.
-The `BasicProductDispenser` and `TerminalDisplay` have not been tested as the logic is considered to be very simple. I added an integrated test with real objects to stay honest (`vending_machine_integrated_spec.rb`).
+
+I have not developed a more realistic product dispenser and catalogue as I'd like to discuss those a bit more should the opportunity arise but through mock objects I have been able to define contracts for them. I used those to create a `BasicProductDispenser` for the purposes of a demo, which has not been tested as the logic is deemed to be very simple. `TerminalDisplay` has not been tested for the same reason and it is an object that sits at the system boundary (it interacts with STDOUT). I added an integrated test with some real objects to stay honest, however  (`vending_machine_integrated_spec.rb`).
 
 The way the work has been done (using dependency inversion) means
 that we can support any currency since that detail has been isolated in the change dispenser. Similarly we have encapsulated the vending machine from implementation details of the product dispenser and product catalogue so the code is, hopefully, SOLID. The parts of the machine listed above are now polymorphic objects with clearly defined contracts.
