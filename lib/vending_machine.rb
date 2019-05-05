@@ -1,4 +1,7 @@
 class VendingMachine
+  extend Forwardable
+  def_delegator :@display, :show
+
   def initialize(catalogue:, product_dispenser:, change_dispenser:, display:)
     @catalogue = catalogue
     @product_dispenser = product_dispenser
@@ -10,7 +13,7 @@ class VendingMachine
     price_of_product = @catalogue.price_for(product_number)
 
     if price_of_product > amount_inserted
-      @display.show('Please insert the correct amount')
+      show('Please insert the correct amount')
       return
     end
 
@@ -33,12 +36,12 @@ class VendingMachine
   private
 
   def dispense_change(change)
-    @display.show('Please collect your change')
+    show('Please collect your change')
     @change_dispenser.dispense(change)
   end
 
   def dispense_product(product_number)
-    @display.show('Please collect your product')
+    show('Please collect your product')
     @product_dispenser.dispense(product_number)
   end
 end
