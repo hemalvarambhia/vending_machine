@@ -1,3 +1,4 @@
+require 'forwardable'
 class VendingMachine
   extend Forwardable
   def_delegator :@display, :show
