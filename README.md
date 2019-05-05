@@ -31,4 +31,8 @@ products are 50p.
 
 **Ruby Version Required:** `2.5.0`
 ### Running the program:
-`ruby run_vending_machine.rb`
+- `bundle install`
+- `ruby run_vending_machine.rb`
+
+### Running the tests:
+- `bundle exec rspec -cfd`
