@@ -168,4 +168,20 @@ describe VendingMachine do
       vending_machine.reload_products(products_to_load)
     end
   end
+
+  describe '#reload_change' do
+    let(:change_to_reload) do
+      {
+        200 => 10,
+        50 => 10,
+        1 => 100
+      }
+    end
+    
+    it 'puts more change into the machine' do
+      expect(change_dispenser).to receive(:reload).with(change_to_reload)
+
+      vending_machine.reload_change(change_to_reload)
+    end
+  end
 end

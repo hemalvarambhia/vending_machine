@@ -30,6 +30,10 @@ class VendingMachine
     @product_dispenser.reload(products_to_load)
   end
 
+  def reload_change(change_to_load)
+    @change_dispenser.reload(change_to_load)
+  end
+
   def amount_of_change
     @change_dispenser.amount_of_change
   end
