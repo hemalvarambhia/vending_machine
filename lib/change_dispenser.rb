@@ -1,5 +1,6 @@
-class BritishChangeDispenser
+class ChangeDispenser
   attr_reader :amount_of_change
+
   def initialize(change)
     @amount_of_change = change
   end

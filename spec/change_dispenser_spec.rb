@@ -1,6 +1,6 @@
 # coding: utf-8
-require './lib/british_change_dispenser'
-describe BritishChangeDispenser do
+require './lib/change_dispenser'
+describe ChangeDispenser do
   describe '#dispense' do
     context '£1' do
       context 'given the dispenser has £1 total in change initially' do
