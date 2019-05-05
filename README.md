@@ -23,6 +23,8 @@ to TDD the next layer down.
 
 I have not developed a more realistic product dispenser and catalogue as I'd like to discuss those a bit more should the opportunity arise but through mock objects I have been able to define contracts for them. I used those to create a `BasicProductDispenser` for the purposes of a demo, which has not been tested as the logic is deemed to be very simple. `TerminalDisplay` has not been tested for the same reason and it is an object that sits at the system boundary (it interacts with STDOUT). I added an integrated test with some real objects to stay honest, however  (`vending_machine_integrated_spec.rb`).
 
+Due to time constraints I have developed the interfaces for reloading products and change but have not yet implemented them. Nevertheless I hope the other work on dispensing change or products show how I would have done this.
+
 The way the work has been done (using dependency inversion) means
 that we can support any currency since that detail has been isolated in the change dispenser. Similarly we have encapsulated the vending machine from implementation details of the product dispenser and product catalogue so the code is, hopefully, SOLID. The parts of the machine listed above are now polymorphic objects with clearly defined contracts.
 
