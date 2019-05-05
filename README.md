@@ -23,7 +23,7 @@ to TDD the next layer down.
 The `BasicProductDispenser` and `TerminalDisplay` have not been tested as the logic is considered to be very simple.
 
 The way the work has been done (using dependency inversion) means
-that we can support any currency since that detail has been isolated in the change dispenser. Similarly we have encapsulated the vending machine from implementation details of the product dispenser and product catalogue so the code is, hopefully, SOLID.
+that we can support any currency since that detail has been isolated in the change dispenser. Similarly we have encapsulated the vending machine from implementation details of the product dispenser and product catalogue so the code is, hopefully, SOLID. The parts of the machine listed above are now polymorphic objects with clearly defined contracts.
 
 ## Executing the program
 For now, due to time constraints, I have created a script where we
