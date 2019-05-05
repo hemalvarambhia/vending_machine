@@ -1,4 +1,4 @@
-require './lib/vending_machine'
+require 'vending_machine'
 describe VendingMachine do
   let(:product_dispenser) { double(:product_dispenser).as_null_object }
   let(:change_dispenser) { double(:change_dispenser).as_null_object }

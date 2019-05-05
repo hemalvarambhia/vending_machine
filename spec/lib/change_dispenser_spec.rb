@@ -1,5 +1,5 @@
 # coding: utf-8
-require './lib/change_dispenser'
+require 'change_dispenser'
 describe ChangeDispenser do
   describe '#dispense' do
     context '£1' do
