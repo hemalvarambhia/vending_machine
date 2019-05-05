@@ -26,6 +26,10 @@ class VendingMachine
     dispense_product(product_number)
   end
 
+  def reload_products(products_to_load)
+    @product_dispenser.reload(products_to_load)
+  end
+
   def amount_of_change
     @change_dispenser.amount_of_change
   end

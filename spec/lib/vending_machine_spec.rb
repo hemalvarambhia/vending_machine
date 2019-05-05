@@ -158,4 +158,14 @@ describe VendingMachine do
       expect(vending_machine.products_in_stock).to eq expected
     end
   end
+
+  describe '#reload_products' do
+    let(:products_to_load) { { 'A1' => 10 } }
+    
+    it 'reloads the products available in the machine' do
+      expect(product_dispenser).to receive(:reload).with(products_to_load)
+
+      vending_machine.reload_products(products_to_load)
+    end
+  end
 end
