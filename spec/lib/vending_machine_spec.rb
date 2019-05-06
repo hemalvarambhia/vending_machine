@@ -115,7 +115,13 @@ describe VendingMachine do
 
       it 'asks the user to select a different product'
 
-      it 'despenses no product'
+      it 'dispenses no product'
+    end
+
+    context 'when the machine is out of change' do
+      it 'dispenses no product'
+
+      it 'returns the user their money'
     end
   end
 
