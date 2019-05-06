@@ -17,7 +17,7 @@ change_dispenser =
     2 => 10,
     1 => 10
   )
-product_dispenser = BasicProductDispenser.new('A1' => 10, 'A2' => 10, 'A3' => 10)
+product_dispenser = BasicProductDispenser.new('A1' => 2, 'A2' => 10, 'A3' => 10)
 
 vending_machine = VendingMachine.new(
   catalogue: product_catalogue,
@@ -28,7 +28,16 @@ vending_machine = VendingMachine.new(
 puts "Products in stock: #{vending_machine.products_in_stock}"
 puts "Change in the vending machine: #{vending_machine.amount_of_change}"
 
-vending_machine.dispense('A1', 65)
+product_to_buy = 'A1'
+amount_to_insert = 65
+puts "Buy product '#{product_to_buy}' costing #{product_catalogue.price_for(product_to_buy)}p, put #{amount_to_insert}p in to the machine"
+vending_machine.dispense(product_to_buy, amount_to_insert)
 
 puts "Products in stock: #{vending_machine.products_in_stock}"
+puts "Change in the vending machine: #{vending_machine.amount_of_change}"
+
+puts "Reload Product 'A1': #{vending_machine.reload_products('A1' => 9)}"
+puts "Products in stock: #{vending_machine.products_in_stock}"
+
+puts "Reload Change: #{vending_machine.reload_change(10 => 1, 5 => 1)}"
 puts "Change in the vending machine: #{vending_machine.amount_of_change}"
