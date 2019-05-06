@@ -8,12 +8,15 @@ In terms of modeling, I have assumed the vending machine consists of:
 - a change dispenser;
 - a display to show the user any instructions.
 
+It is assumed that:
+- all currencies are in pence/cents etc. e.g. £2.55
+is taken as 255p, modelling them as integers for now until there is a clear need to introduce the concept of money; and
+- product numbers take the form 'A10', 'B5' etc.
+
+
 No edge cases have been considered in solving this problem beyond any
 specified in the functional requirements.
 Nevertheless, edge cases have been identified and listed as pending tests and would be the topic of a conversation with the manufacterer of the vending machine.
-
-It is assumed that all currencies are in pence/cents etc. e.g. £2.55
-is taken as 255p and that product numbers take the form 'A10', 'B5' etc.
 
 In terms of reviewing the work I recommend starting with the
 `vending_machine_spec.rb` which is a unit test for the vending machine.
