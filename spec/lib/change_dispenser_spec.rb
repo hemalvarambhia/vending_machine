@@ -218,4 +218,45 @@ describe ChangeDispenser do
       end
     end
   end
+
+  describe '#reload' do
+    subject(:change_dispenser) do
+      described_class.new(
+        200 => 1000,
+        100 => 2,
+        50 => 50,
+        20 => 10,
+        10 => 4,
+        5 => 10,
+        2 => 75,
+        1 => 1000
+      )
+    end
+
+    let(:expected) do
+      {
+        200 => 1000,
+        100 => 1000,
+        50 => 1000,
+        20 => 1000,
+        10 => 1000,
+        5 => 1000,
+        2 => 1000,
+        1 => 1000
+      }
+    end
+
+    it 'puts change into the change dispenser' do
+      change_dispenser.reload(
+        100 => 998,
+        50 => 950,
+        20 => 990,
+        10 => 996,
+        5 => 990,
+        2 => 925
+      )
+      
+      expect(change_dispenser.amount_of_change).to eq expected
+    end
+  end
 end

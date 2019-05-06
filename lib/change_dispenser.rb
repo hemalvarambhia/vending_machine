@@ -21,7 +21,13 @@ class ChangeDispenser
     return [ change ] if change == required_denominations.first
     [required_denominations.first] +
       coins_for(change - required_denominations.first)
-  end  
+  end
+
+  def reload(change)
+    change.each do |denomination, quantity|
+      @amount_of_change[denomination] = @amount_of_change[denomination] + quantity 
+    end
+  end
 
   private
 
