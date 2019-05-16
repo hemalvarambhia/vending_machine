@@ -3,8 +3,9 @@ class VendingMachine
   extend Forwardable
   def_delegator :@display, :show
 
-  def initialize(catalogue:, product_dispenser:, change_dispenser:, display:)
+  def initialize(catalogue:, product_dispenser:, change_dispenser:, display:, transaction_recorder:)
     @catalogue = catalogue
+    @transaction_recorder = transaction_recorder
     @product_dispenser = product_dispenser
     @change_dispenser = change_dispenser
     @display = display
@@ -22,8 +23,9 @@ class VendingMachine
       change = amount_inserted - price_of_product
       dispense_change(change)
     end
-    
+
     dispense_product(product_number)
+    @transaction_recorder.record(product: product_number, price: price_of_product)
   end
 
   def reload_products(products_to_load)

@@ -4,11 +4,13 @@ describe VendingMachine do
   let(:change_dispenser) { double(:change_dispenser).as_null_object }
   let(:catalogue) { double(:product_catalogue).as_null_object }
   let(:display_screen) { double(:display_screen).as_null_object }
+  let(:transaction_recorder) { double(:transaction_recorder).as_null_object }
 
   subject(:vending_machine) do
     VendingMachine.new(
       catalogue: catalogue,
       display: display_screen,
+      transaction_recorder: transaction_recorder,
       product_dispenser: product_dispenser,
       change_dispenser: change_dispenser
     )
@@ -17,14 +19,14 @@ describe VendingMachine do
   describe '#dispense' do
     let(:product_number) { '25' }
     let(:amount_inserted) { 50 }
-    
+
     context 'when the customer pays the correct amount for the product' do
       before do
         allow(catalogue).to(
           receive(:price_for).with(product_number).and_return(50)
         )
       end
-          
+
       it 'dispenses the product' do
         expect(product_dispenser).to receive(:dispense).with(product_number)
 
@@ -52,24 +54,24 @@ describe VendingMachine do
           receive(:price_for).with(product_number).and_return 75
         )
       end
-          
+
       it 'does not dispense the product' do
         expect(product_dispenser).not_to receive(:dispense)
 
         vending_machine.dispense(product_number, amount_inserted)
       end
-      
+
       it 'does not dispense any change' do
         expect(change_dispenser).not_to receive(:dispense)
-        
+
         vending_machine.dispense(product_number, amount_inserted)
       end
-      
+
       it 'asks them to insert the correct amount' do
         expect(display_screen).to(
           receive(:show).with('Please insert the correct amount')
         )
-        
+
         vending_machine.dispense(product_number, amount_inserted)
       end
     end
@@ -80,7 +82,7 @@ describe VendingMachine do
           receive(:price_for).with(product_number).and_return(50 - 5)
         )
       end
-      
+
       it 'dispenses the correct change'do
         expect(change_dispenser).to receive(:dispense).with(5)
 
@@ -138,7 +140,7 @@ describe VendingMachine do
         1 => 100
       }
     end
-    
+
     it 'returns the amount of change in the machine in pence' do
       allow(change_dispenser).to(
         receive(:amount_of_change)
@@ -157,17 +159,17 @@ describe VendingMachine do
         '678' => 25
       }
     end
-    
+
     it 'returns the products in stock (product number & the quantity available)' do
       allow(product_dispenser).to receive(:products_in_stock).and_return(expected)
-      
+
       expect(vending_machine.products_in_stock).to eq expected
     end
   end
 
   describe '#reload_products' do
     let(:products_to_load) { { 'A1' => 10 } }
-    
+
     it 'reloads the products available in the machine' do
       expect(product_dispenser).to receive(:reload).with(products_to_load)
 
@@ -183,11 +185,29 @@ describe VendingMachine do
         1 => 100
       }
     end
-    
+
     it 'puts more change into the machine' do
       expect(change_dispenser).to receive(:reload).with(change_to_reload)
 
       vending_machine.reload_change(change_to_reload)
+    end
+  end
+
+  describe 'recording sale transaction' do
+    before do
+      allow(catalogue).to(
+        receive(:price_for).with('A1').and_return(50)
+      )
+    end
+
+    subject(:dispense) { vending_machine.dispense('A1', 50) }
+
+    context 'when the product is dispensed' do
+      it 'records the transaction (item bought and its value)' do
+        expect(transaction_recorder).to receive(:record).with(product: 'A1', price: 50)
+
+        dispense
+      end
     end
   end
 end
