@@ -13,6 +13,12 @@ class StringBasedDisplay
   end
 end
 
+class RecordNothing
+  def record(transaction)
+
+  end
+end
+
 describe VendingMachine do
   let(:the_console) { StringIO.new }
   let(:vending_machine) do
@@ -29,9 +35,10 @@ describe VendingMachine do
         10 => 10,
         5 => 10,
         2 => 10,
-        1 => 10  
+        1 => 10
       ),
-      display: StringBasedDisplay.new(the_console)
+      display: StringBasedDisplay.new(the_console),
+      transaction_recorder: RecordNothing.new
     )
   end
 
@@ -51,25 +58,25 @@ describe VendingMachine do
 
   it 'dispenses the correct product' do
     vending_machine.dispense('A1', 55)
-    
+
     expect(vending_machine.products_in_stock).to eq expected_products_remaining
   end
 
   it 'dispenses the correct amount of change' do
     vending_machine.dispense('A1', 55)
-    
+
     expect(vending_machine.amount_of_change).to eq expected_change_remaining
   end
 
   it 'asks the user to collect their change' do
     vending_machine.dispense('A1', 55)
-    
+
     expect(the_console.string).to match /Please collect your change/
   end
 
   it 'asks the user to collect their product' do
     vending_machine.dispense('A1', 55)
-    
+
     expect(the_console.string).to match /Please collect your product/
   end
 end
