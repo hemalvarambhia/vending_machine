@@ -1,6 +1,16 @@
 class InMemoryTransactionRecorder
+  def initialize
+    @transactions = []
+  end
+
+  def record(transaction)
+    @transactions << transaction[:product_number]
+  end
 
   def most_popular_items(number)
-    %w{A1 A2 A3}
+    @transactions
+      .group_by { |product| product }
+      .sort_by { |product_number, products| products.count }
+      .map { |product_number, products| product_number }
   end
 end
